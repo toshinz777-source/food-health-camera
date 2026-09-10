@@ -1,6 +1,7 @@
 :root {
   --card-bg: #ffffff;
   --muted: #6b7280;
+  --border: #e5e7eb;
 
   font: 16px/1.5 system-ui, 'Segoe UI', Roboto, sans-serif;
   color-scheme: light dark;
@@ -21,12 +22,23 @@ body {
   min-height: 100vh;
 }
 
+button {
+  font-family: inherit;
+}
+
 h1,
-h2 {
+h2,
+h3 {
   font-weight: 700;
 }
 
 @media (prefers-color-scheme: dark) {
+  :root {
+    --card-bg: #1f2937;
+    --muted: #9ca3af;
+    --border: #374151;
+  }
+
   body {
     background: #111827;
     color: #f9fafb;

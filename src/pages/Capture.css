@@ -1,0 +1,166 @@
+.capture {
+  padding: 16px 16px 40px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.capture__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.capture__header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.capture__back {
+  background: none;
+  border: none;
+  color: #16a34a;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.capture__step-label {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 12px 0 8px;
+}
+
+.capture__meal-type {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.capture__chip {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.capture__chip--active {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: white;
+  font-weight: 700;
+}
+
+.capture__error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+.capture__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.capture__big-button {
+  padding: 20px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: white;
+  background: #16a34a;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.capture__big-button--secondary {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.capture__preview {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 12px;
+}
+
+.capture__name-input {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  background: var(--card-bg);
+  color: inherit;
+}
+
+.capture__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.capture__tag {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: var(--card-bg);
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+.capture__tag--positive.capture__tag--active {
+  background: #dcfce7;
+  border-color: #16a34a;
+  color: #166534;
+  font-weight: 700;
+}
+
+.capture__tag--warning.capture__tag--active {
+  background: #fee2e2;
+  border-color: #dc2626;
+  color: #991b1b;
+  font-weight: 700;
+}
+
+.capture__score-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid;
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.capture__score-preview strong {
+  font-size: 1.3rem;
+}
+
+.capture__save-button {
+  width: 100%;
+  padding: 18px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: white;
+  background: #16a34a;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+}

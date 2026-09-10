@@ -1,0 +1,48 @@
+.score-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 6px solid;
+  border-radius: 50%;
+  background: var(--card-bg);
+}
+
+.score-badge--large {
+  width: 140px;
+  height: 140px;
+}
+
+.score-badge--small {
+  width: 64px;
+  height: 64px;
+  border-width: 4px;
+}
+
+.score-badge--large .score-badge__value {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.score-badge--small .score-badge__value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.score-badge__label {
+  font-size: 0.7rem;
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.score-badge--small .score-badge__label {
+  font-size: 0.55rem;
+  margin-top: 2px;
+}
+
+.score-badge--empty {
+  border-color: #d1d5db;
+  color: #9ca3af;
+}

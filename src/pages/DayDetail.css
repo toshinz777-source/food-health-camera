@@ -1,0 +1,74 @@
+.day-detail {
+  padding: 16px 16px 100px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.day-detail__back {
+  background: none;
+  border: none;
+  color: #16a34a;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-bottom: 8px;
+}
+
+.day-detail__date {
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+.day-detail__score-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.day-detail__empty {
+  text-align: center;
+  color: var(--muted);
+}
+
+.day-detail__summary {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.day-detail__summary p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.day-detail__good {
+  color: #166534;
+}
+
+.day-detail__improve {
+  color: #92400e;
+}
+
+.day-detail__meals {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.day-detail__group h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.day-detail__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

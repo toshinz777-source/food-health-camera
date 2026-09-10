@@ -1,0 +1,76 @@
+.week {
+  padding: 20px 16px 100px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.week__title {
+  text-align: center;
+  font-size: 1.05rem;
+  margin: 0 0 24px;
+}
+
+.week__chart {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 220px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 16px 8px 12px;
+  margin-bottom: 20px;
+}
+
+.week__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  flex: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  gap: 6px;
+  color: inherit;
+}
+
+.week__value {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.week__bar-track {
+  width: 22px;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.week__bar {
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  transition: height 0.2s ease;
+}
+
+.week__weekday {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.week__average {
+  text-align: center;
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.week__average p {
+  margin: 0 0 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.week__average strong {
+  font-size: 1.6rem;
+}

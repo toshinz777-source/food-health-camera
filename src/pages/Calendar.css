@@ -1,0 +1,99 @@
+.calendar {
+  padding: 16px 16px 100px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.calendar__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.calendar__nav h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  min-width: 140px;
+  text-align: center;
+}
+
+.calendar__nav button {
+  font-size: 1.4rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+
+.calendar__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+}
+
+.calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.calendar__cell {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  border: none;
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.calendar__cell--empty {
+  background: transparent;
+  cursor: default;
+}
+
+.calendar__cell--today {
+  outline: 2px solid #111827;
+  outline-offset: -2px;
+}
+
+.calendar__day {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.calendar__day--filled {
+  color: white;
+  font-weight: 700;
+}
+
+.calendar__legend {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.calendar__legend span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calendar__legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
