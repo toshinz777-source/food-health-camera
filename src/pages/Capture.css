@@ -114,6 +114,23 @@
   margin-bottom: 16px;
 }
 
+.capture__tags-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+.capture__tags-warning {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: -6px 0 16px;
+}
+
 .capture__tag {
   padding: 10px 16px;
   border-radius: 999px;

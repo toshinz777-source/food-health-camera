@@ -1,5 +1,14 @@
 import { useRef, useState } from 'react'
-import { emptyTags, MEAL_TYPES, MEAL_TYPE_LABEL, type Meal, type MealTags, type MealType } from '../types'
+import {
+  emptyTags,
+  hasAnyTag,
+  MEAL_TYPES,
+  MEAL_TYPE_LABEL,
+  TAG_OPTIONS,
+  type Meal,
+  type MealTags,
+  type MealType,
+} from '../types'
 import { guessCurrentMealType, todayKey } from '../dateUtils'
 import { scoreMeal, getTier } from '../scoring'
 import './Capture.css'
@@ -14,17 +23,6 @@ function fileToDataUrl(file: File): Promise<string> {
     reader.readAsDataURL(file)
   })
 }
-
-const TAG_OPTIONS: { key: keyof MealTags; label: string; kind: 'positive' | 'warning' }[] = [
-  { key: 'vegetables', label: '野菜', kind: 'positive' },
-  { key: 'fruit', label: '果物', kind: 'positive' },
-  { key: 'protein', label: 'タンパク質', kind: 'positive' },
-  { key: 'carbs', label: '炭水化物', kind: 'positive' },
-  { key: 'fat', label: '脂質', kind: 'positive' },
-  { key: 'sweets', label: '甘い物', kind: 'warning' },
-  { key: 'saltyHigh', label: '塩分が多そう', kind: 'warning' },
-  { key: 'processedHigh', label: '加工食品が多そう', kind: 'warning' },
-]
 
 export function Capture({
   onSave,
@@ -173,6 +171,8 @@ export function Capture({
         onChange={(e) => setName(e.target.value)}
       />
 
+      <p className="capture__tags-label">この食事に含まれるものをタップして選んでください（複数選択可）</p>
+
       <div className="capture__tags">
         {TAG_OPTIONS.map((opt) => (
           <button
@@ -187,6 +187,12 @@ export function Capture({
           </button>
         ))}
       </div>
+
+      {!hasAnyTag(tags) && (
+        <p className="capture__tags-warning">
+          ⚠️ まだ何も選択されていません。写真は自動判定されないため、内容を選ばないとスコアは基準点のままになります。
+        </p>
+      )}
 
       <div className="capture__score-preview" style={{ borderColor: tier.color }}>
         <span>この食事の推定スコア</span>

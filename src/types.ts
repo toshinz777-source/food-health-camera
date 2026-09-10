@@ -44,3 +44,18 @@ export function emptyTags(): MealTags {
     processedHigh: false,
   }
 }
+
+export const TAG_OPTIONS: { key: keyof MealTags; label: string; kind: 'positive' | 'warning' }[] = [
+  { key: 'vegetables', label: '野菜', kind: 'positive' },
+  { key: 'fruit', label: '果物', kind: 'positive' },
+  { key: 'protein', label: 'タンパク質', kind: 'positive' },
+  { key: 'carbs', label: '炭水化物', kind: 'positive' },
+  { key: 'fat', label: '脂質', kind: 'positive' },
+  { key: 'sweets', label: '甘い物', kind: 'warning' },
+  { key: 'saltyHigh', label: '塩分が多そう', kind: 'warning' },
+  { key: 'processedHigh', label: '加工食品が多そう', kind: 'warning' },
+]
+
+export function hasAnyTag(tags: MealTags): boolean {
+  return TAG_OPTIONS.some((opt) => tags[opt.key])
+}
