@@ -2,6 +2,12 @@
 
 毎日の食事をスマホのカメラで記録し、健康スコアで食生活を振り返るためのWebアプリです。
 
+## 公開URL
+
+https://toshinz777-source.github.io/food-health-camera/
+
+`main` ブランチへのpushで GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) が自動的にビルド・デプロイします。
+
 ## セットアップ
 
 ```bash
