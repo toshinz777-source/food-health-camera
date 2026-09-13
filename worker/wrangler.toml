@@ -1,0 +1,10 @@
+name = "food-health-camera-api"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ALLOWED_ORIGIN = "https://toshinz777-source.github.io"
+
+# ANTHROPIC_API_KEY is a secret, not a var:
+# set it with `wrangler secret put ANTHROPIC_API_KEY` (see worker/README.md)

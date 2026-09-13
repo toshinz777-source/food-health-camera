@@ -11,6 +11,7 @@ import {
 } from '../types'
 import { guessCurrentMealType, todayKey } from '../dateUtils'
 import { scoreMeal, getTier } from '../scoring'
+import { analyzeFoodPhoto, fileToBase64, isAnalysisConfigured } from '../analyzeFood'
 import './Capture.css'
 
 type Step = 'capture' | 'confirm'
@@ -37,9 +38,12 @@ export function Capture({
   const [name, setName] = useState('')
   const [tags, setTags] = useState<MealTags>(emptyTags())
   const [error, setError] = useState<string | null>(null)
+  const [analyzing, setAnalyzing] = useState(false)
+  const [analysisError, setAnalysisError] = useState<string | null>(null)
 
   const cameraInputRef = useRef<HTMLInputElement>(null)
   const galleryInputRef = useRef<HTMLInputElement>(null)
+  const analysisTokenRef = useRef(0)
 
   async function handleFile(file: File | undefined) {
     if (!file) return
@@ -48,8 +52,44 @@ export function Capture({
       setPhoto(dataUrl)
       setStep('confirm')
       setError(null)
+      setName('')
+      setTags(emptyTags())
+      setAnalysisError(null)
+      runAnalysis(file)
     } catch (err) {
       setError(err instanceof Error ? err.message : '画像の読み込みに失敗しました。')
+    }
+  }
+
+  async function runAnalysis(file: File) {
+    if (!isAnalysisConfigured()) return
+
+    const token = ++analysisTokenRef.current
+    setAnalyzing(true)
+    setAnalysisError(null)
+    try {
+      const { data, mediaType } = await fileToBase64(file)
+      const result = await analyzeFoodPhoto(data, mediaType)
+      if (analysisTokenRef.current !== token) return // a newer photo was taken meanwhile
+
+      setName(result.name)
+      setTags({
+        vegetables: result.vegetable,
+        fruit: result.fruit,
+        protein: result.protein,
+        carbs: result.carb,
+        fat: result.fat,
+        sweets: result.sweet,
+        saltyHigh: result.salty,
+        processedHigh: result.processed,
+      })
+    } catch (err) {
+      if (analysisTokenRef.current !== token) return
+      setAnalysisError(
+        err instanceof Error ? err.message : 'AIによる自動判定に失敗しました。内容を手動で選択してください。',
+      )
+    } finally {
+      if (analysisTokenRef.current === token) setAnalyzing(false)
     }
   }
 
@@ -58,6 +98,9 @@ export function Capture({
   }
 
   function handleRetake() {
+    analysisTokenRef.current++ // invalidate any in-flight analysis for the discarded photo
+    setAnalyzing(false)
+    setAnalysisError(null)
     setPhoto(null)
     setStep('capture')
   }
@@ -151,12 +194,26 @@ export function Capture({
 
       {photo && <img src={photo} alt="撮影した食事" className="capture__preview" />}
 
+      {analyzing && (
+        <div className="capture__analyzing">
+          <span className="capture__spinner" aria-hidden="true" />
+          AIが写真を判定しています…
+        </div>
+      )}
+
+      {analysisError && !analyzing && (
+        <p className="capture__analysis-error">
+          ⚠️ 自動判定に失敗しました: {analysisError} 内容を手動で選択してください。
+        </p>
+      )}
+
       <div className="capture__meal-type">
         {MEAL_TYPES.map((type) => (
           <button
             key={type}
             className={`capture__chip ${mealType === type ? 'capture__chip--active' : ''}`}
             onClick={() => setMealType(type)}
+            disabled={analyzing}
           >
             {MEAL_TYPE_LABEL[type]}
           </button>
@@ -169,6 +226,7 @@ export function Capture({
         placeholder="食べ物の名前（例：鮭の塩焼き定食）"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        disabled={analyzing}
       />
 
       <p className="capture__tags-label">この食事に含まれるものをタップして選んでください（複数選択可）</p>
@@ -181,6 +239,7 @@ export function Capture({
               tags[opt.key] ? 'capture__tag--active' : ''
             }`}
             onClick={() => toggleTag(opt.key)}
+            disabled={analyzing}
           >
             {tags[opt.key] ? '✓ ' : ''}
             {opt.label}
@@ -188,7 +247,7 @@ export function Capture({
         ))}
       </div>
 
-      {!hasAnyTag(tags) && (
+      {!hasAnyTag(tags) && !analyzing && (
         <p className="capture__tags-warning">
           ⚠️ まだ何も選択されていません。写真は自動判定されないため、内容を選ばないとスコアは基準点のままになります。
         </p>
@@ -200,7 +259,7 @@ export function Capture({
       </div>
 
       <p className="capture__step-label">ステップ3: 保存</p>
-      <button className="capture__save-button" onClick={handleSave}>
+      <button className="capture__save-button" onClick={handleSave} disabled={analyzing}>
         保存する
       </button>
     </div>
